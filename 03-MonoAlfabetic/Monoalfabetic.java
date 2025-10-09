@@ -1,4 +1,4 @@
-import java.util.Random;
+|import java.util.Random;
 
 public class Monoalfabetic {
     public static final char[] alfabet = "ABCDEFGHIJKLMNOPQRSTUVWYXZÀÁÄÈÉËÌÍÏÒÓÖÙÚÜÇN".toCharArray();
