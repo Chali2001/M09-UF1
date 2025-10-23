@@ -1,11 +1,12 @@
+package iticbcn.xifratge;
 import java.util.Random;
 
-public class Monoalfabetic {
+public class XifradorMonoalfabetic extends Xifrador {
     public static final char[] alfabet = "ABCDEFGHIJKLMNOPQRSTUVWYXZÀÁÄÈÉËÌÍÏÒÓÖÙÚÜÇN".toCharArray();
 
-    public static char[] alfabetPermutat = permutaAlfabet(alfabet);
+    public char[] alfabetPermutat = permutaAlfabet(alfabet);
 
-    public static char[] permutaAlfabet(char[] alfabet) {
+    public char[] permutaAlfabet(char[] alfabet) {
         char[] copia = new char[alfabet.length];
         for (int i = 0; i < alfabet.length; i++) {
             copia[i] = alfabet[i];
@@ -20,14 +21,14 @@ public class Monoalfabetic {
         return copia;
     }
 
-    private static int indexOf(char[] arr, char c) {
+    private int indexOf(char[] arr, char c) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == c) return i;
         }
         return -1;
     }
 
-    public static String xifraMonoAlfa(String cadena) {
+    public String xifraMonoAlfa(String cadena) {
         String resultat = "";
         for (int i = 0; i < cadena.length(); i++) {
             char caracter = cadena.charAt(i);
@@ -45,7 +46,7 @@ public class Monoalfabetic {
         return resultat;
     }
 
-    public static String desxifraMonoAlfa(String cadena) {
+    public String desxifraMonoAlfa(String cadena) {
         String resultat = "";
         for (int i = 0; i < cadena.length(); i++) {
             char caracter = cadena.charAt(i);
@@ -61,15 +62,6 @@ public class Monoalfabetic {
             }
         }
         return resultat;
-    }
-
-    public static void main(String[] args) {
-        String text = "Perdó, per tu què és?";
-        String textXifrat = xifraMonoAlfa(text);
-        String textDesXifrat = desxifraMonoAlfa(textXifrat);
-        System.out.println("Text Original: " + text);
-        System.out.println("Text Xifrat: " + textXifrat);
-        System.out.println("Text DesXifrat: " + textDesXifrat);
     }
 
 }
