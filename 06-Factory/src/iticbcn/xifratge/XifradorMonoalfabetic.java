@@ -1,7 +1,7 @@
 package iticbcn.xifratge;
 import java.util.Random;
 
-public class XifradorMonoalfabetic extends Xifrador {
+public class XifradorMonoalfabetic implements Xifrador {
     public static final char[] alfabet = "ABCDEFGHIJKLMNOPQRSTUVWYXZÀÁÄÈÉËÌÍÏÒÓÖÙÚÜÇN".toCharArray();
 
     public char[] alfabetPermutat = permutaAlfabet(alfabet);
@@ -64,4 +64,22 @@ public class XifradorMonoalfabetic extends Xifrador {
         return resultat;
     }
 
+    @Override
+    public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada {
+        if (clau != null){
+            throw new ClauNoSuportada("Xifratje monoalfabètic no soporta clau != null");
+        }
+
+        String resultat = xifraMonoAlfa(msg);
+        return new TextXifrat(resultat.getBytes());
+    }
+
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        if (clau != null) {
+            throw new ClauNoSuportada("Xifratge monoalfabètic no suporta clau != null");
+        }
+        String msg = new String(xifrat.getBytes());
+        return desxifraMonoAlfa(msg);
+    }
 }

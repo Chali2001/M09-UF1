@@ -3,10 +3,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class XifradorPolialfabetic {
+public class XifradorPolialfabetic implements Xifrador{
     public static final char[] alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÄÈÉËÌÍÏÒÓÖÙÚÜÇÑ".toCharArray();
-    public static String alfabetPermutat = "";
-    public static Random random;
+    public  String alfabetPermutat = "";
+    public  Random random;
 
     public void initRandom(Long clau){
         random = new Random(clau);
@@ -103,5 +103,33 @@ public class XifradorPolialfabetic {
             }
         }
         return resultat;
+    }
+
+    @Override
+    public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada {
+        long seed;
+        try {
+            seed = Long.parseLong(clau);
+        } catch (Exception e) {
+            throw new ClauNoSuportada("La clau per xifrat Polialfabètic ha de ser un String convertible a long");
+        }
+        initRandom(seed);
+
+        String resultat = xifraPoliAlfa(msg);
+        return new TextXifrat(resultat.getBytes());
+    }
+
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        long seed;
+        try{
+            seed = Long.parseLong(clau);
+        } catch (Exception e) {
+            throw new ClauNoSuportada("La clau de Polialfabètic ha de ser un String convertible a long");
+        }
+        initRandom(seed);
+
+        String msg = new String(xifrat.getBytes());
+        return desxifraPoliAlfa(msg);
     }
 }

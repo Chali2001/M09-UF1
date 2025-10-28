@@ -48,7 +48,8 @@ public class XifradorRotX implements Xifrador {
         return resultat;
     }
 
-    public TextXifrat xifrat(String msg, String clau) throws ClauNoSuportada{
+    @Override
+    public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada{
         int desplaçament;
         try {
             desplaçament = Integer.parseInt(clau);
@@ -60,9 +61,10 @@ public class XifradorRotX implements Xifrador {
             throw new ClauNoSuportada("Clau de RotX ha de ser un sencer de 0 a 40");
         }
         String TextXifrat = xifratRotX(msg, desplaçament);
-        return new TextXifrat(textXifrat.getBytes());
+        return new TextXifrat(TextXifrat.getBytes());
     }
-    public String desXifra(TextXifrat xifrat, String clau) throws ClauNoSuportada{
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada{
         int desplaçament;
         try {
             desplaçament = Integer.parseInt(clau);
